@@ -58,25 +58,42 @@ class LinkedList {
 
   pop() {
 
-    let temp;
+    // let temp;
 
-    if (this.length === 0) {
-      return "Invalid"
-    } else if (this.length === 1) {
-      temp = this.head;
-      this.head = null;
-      this.tail = this.head;
-      this.length -= 1;
-      return temp;
-    } else {
-      
-    }
+    // if (this.length === 0) {
+    //   return "Invalid"
+    // } else if (this.length === 1) {
+    //   temp = this.head.val;
+    //   this.head = null;
+    //   this.tail = this.head;
+    //   this.length -= 1;
+    //   return temp;
+    // } else {
+
+    // }
 
   }
 
   /** shift(): return & remove first item. */
 
   shift() {
+
+    let temp;
+
+    if (!this.head) {
+      return "Invalid";
+    } else if (this.length === 1) {
+      temp = this.head.val;
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return temp;
+    } else {
+      temp = this.head.val;
+      this.head = this.head.next;
+      this.length -= 1;
+      return temp;
+    }
 
   }
 
