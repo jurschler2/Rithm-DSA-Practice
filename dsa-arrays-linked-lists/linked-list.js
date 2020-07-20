@@ -58,19 +58,36 @@ class LinkedList {
 
   pop() {
 
-    // let temp;
+    if (!this.head) {
+      throw new Error("Invalid");
+    }
 
-    // if (this.length === 0) {
-    //   return "Invalid"
-    // } else if (this.length === 1) {
-    //   temp = this.head.val;
-    //   this.head = null;
-    //   this.tail = this.head;
-    //   this.length -= 1;
-    //   return temp;
-    // } else {
+    let temp;
 
-    // }
+    if (this.length === 1) {
+
+      temp = this.head;
+      this.head = null;
+      this.tail = null;
+      this.length -= 1;
+      return temp.val;
+
+    } else {
+
+      let current = this.head;
+      let count = 0;
+
+      while (count !== this.length - 2) {
+        current = current.next;
+        count += 1;
+      }
+
+      temp = this.tail;
+      this.tail = current;
+      this.length -= 1;
+      return temp.val;
+
+    }
 
   }
 
@@ -141,22 +158,26 @@ class LinkedList {
 
   insertAt(idx, val) {
 
-    // if (idx >= this.length || idx < 0) {
-    //   throw new Error("Invalid");
-    // }
+    if (idx > this.length || idx < 0) {
+      throw new Error("Invalid");
+    }
 
-    // let current = this.head;
-    // let count = 0;
+    if (idx === 0) return this.unshift(val);
+    if (idx === this.length) return this.push(val);
 
-    // while (current !== null && count !== idx - 1) {
-    //   count += 1;
-    //   current = current.next;
-    // }
 
-    // let newNode = new Node(val);
-    // newNode.next = current.next;
-    // current.next = newNode;
-    // this.length += 1;
+    let current = this.head;
+    let count = 0;
+
+    while (current !== null && count !== idx - 1) {
+      count += 1;
+      current = current.next;
+    }
+
+    let newNode = new Node(val);
+    newNode.next = current.next;
+    current.next = newNode;
+    this.length += 1;
 
   }
 
@@ -164,12 +185,35 @@ class LinkedList {
 
   removeAt(idx) {
 
+    if (idx >= this.length || idx < 0) {
+      throw new Error("Invalid");
+    }
+
+    if (idx === 0) return this.pop();
+
+
+
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
     
+    if (this.length === 0) return 0;
+
+
+    let current = this.head;
+    let sum = current.val;
+    let count = 1;
+
+    while (count < this.length) {
+      current = current.next;
+      sum += current.val;
+      count += 1;
+    }
+
+    return sum / count;
+
   }
 }
 
