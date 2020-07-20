@@ -101,17 +101,62 @@ class LinkedList {
 
   getAt(idx) {
 
+    if (idx >= this.length || idx < 0) {
+      throw new Error("Invalid");
+    }
+
+    let current = this.head;
+    let count = 0;
+
+    while (current !== null && count !== idx) {
+      count += 1;
+      current = current.next;
+    }
+
+    return current.val;
+
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
 
+    if (idx >= this.length || idx < 0) {
+      throw new Error("Invalid");
+    }
+
+    let current = this.head;
+    let count = 0;
+
+    while (current !== null && count !== idx) {
+      count += 1;
+      current = current.next;
+    }
+
+    current.val = val;
+
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+
+    // if (idx >= this.length || idx < 0) {
+    //   throw new Error("Invalid");
+    // }
+
+    // let current = this.head;
+    // let count = 0;
+
+    // while (current !== null && count !== idx - 1) {
+    //   count += 1;
+    //   current = current.next;
+    // }
+
+    // let newNode = new Node(val);
+    // newNode.next = current.next;
+    // current.next = newNode;
+    // this.length += 1;
 
   }
 
