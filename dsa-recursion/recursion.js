@@ -1,6 +1,18 @@
 /** product: calculate the product of an array of numbers. */
 
 function product(nums) {
+  
+  let prod = 1;
+  let i = 0;
+
+  function _product(nums, idx) {
+    if (idx === nums.length) return 1;
+    prod *= nums[idx];
+    return prod * _product(nums, idx + 1);
+  }
+
+  _product(nums, i);
+  return prod;
 
 }
 
@@ -8,11 +20,36 @@ function product(nums) {
 
 function longest(words) {
 
+  let l = 0;
+  let i = 0;
+
+  function _longest(words, idx) {
+    if (idx === words.length) return;
+    if (words[idx].length > l) {
+      l = words[idx].length;
+    }
+    return _longest(words, idx + 1);
+  }
+  _longest(words, i);
+  return l;
+  
 }
 
 /** everyOther: return a string with every other letter. */
 
 function everyOther(str) {
+
+  let output = "";
+  let i = 0;
+
+  function _everyOther(s, idx) {
+    if (idx === s.length) return;
+    if (idx % 2 === 0) output += s[idx];
+    return _everyOther(s, idx + 1)
+  }
+  
+  _everyOther(str, i);
+  return output;
 
 }
 
@@ -20,11 +57,32 @@ function everyOther(str) {
 
 function isPalindrome(str) {
 
+  let start = 0;
+  let end = str.length - 1;
+
+  function _isPalindrome(s, stIdx, eIdx) {
+    if (eIdx <= stIdx) return true;
+    if (s[stIdx] !== s[eIdx]) return false;
+    return _isPalindrome(s, stIdx+1, eIdx-1)
+    }
+  return _isPalindrome(str, start, end);
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
 function findIndex(arr, val) {
+
+  let i = 0;
+  let output = -1;
+
+  function _findIndex(a, v, idx) {
+    if (idx === a.length) return;
+    if (a[idx] === v) return output = idx;
+    return _findIndex(a, v, idx + 1);
+  }
+
+  _findIndex(arr, val, i);
+  return output;
 
 }
 
