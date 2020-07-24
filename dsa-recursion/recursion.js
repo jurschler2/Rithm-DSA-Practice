@@ -90,18 +90,44 @@ function findIndex(arr, val) {
 
 function revString(str) {
 
+  let rev = "";
+  let i = str.length - 1;
+
+  function _revString(s, idx) {
+    if (idx === -1) return;
+    rev += s[idx];
+    return _revString(s, idx-1);
+  }
+
+  _revString(str, i);
+  return rev;
+
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
 
+  let arr = [];
+  for (let key in obj) {
+    if (typeof obj[key] === "string") arr.push(obj[key]);
+    if (typeof obj[key] === "object") arr.push(...gatherStrings(obj[key]));
+  }
+  return arr;
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearch(arr, val) {
+function binarySearch(arr, val, l=0, r=arr.length) {
+
+  if (l > r) return -1;
+  
+  let m = Math.floor((r + l) / 2);
+
+  if (arr[m] === val) return m;
+  if (arr[m] > val) return binarySearch(arr, val, l, m - 1);
+  return binarySearch(arr, val, m + 1, r);
 
 }
 
