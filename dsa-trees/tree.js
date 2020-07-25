@@ -35,12 +35,43 @@ class Tree {
 
   countEvens() {
 
+    if (this.root === null) return 0;
+
+    let count = 0;
+
+    if (this.root.val % 2 === 0) count += 1;
+
+    function _countEvens(cur) {
+
+      for (let c of cur.children) {
+        if (c.val % 2 === 0) count += 1;
+        if (c.children.length > 0) return _countEvens(c);
+      }
+    }
+    _countEvens(this.root);
+    return count;
   }
 
   /** numGreater(lowerBound): return a count of the number of nodes
    * whose value is greater than lowerBound. */
 
   numGreater(lowerBound) {
+
+    if (this.root === null) return 0;
+
+    let count = 0;
+
+    if (this.root.val > lowerBound) count += 1;
+
+    function _numGreater(cur) {
+
+      for (let c of cur.children) {
+        if (c.val > lowerBound) count += 1;
+        if (c.children.length > 0) return _numGreater(c);
+      }
+    }
+    _numGreater(this.root);
+    return count;
 
   }
 }
