@@ -16,15 +16,27 @@ class BinaryTree {
   /** minDepth(): return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
 
-  minDepth() {
+  minDepth(node=this.root) {
 
+    if (!node) return 0;
+
+    return Math.min(
+      this.minDepth(node.left),
+      this.minDepth(node.right)
+    ) + 1;
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
-  maxDepth() {
+  maxDepth(node=this.root) {
 
+    if (!node) return 0;
+
+    return Math.max(
+      this.maxDepth(node.left),
+      this.maxDepth(node.right)
+    ) + 1;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
@@ -32,12 +44,26 @@ class BinaryTree {
 
   maxSum() {
 
+    let max = 0;
+
+    function _maxSum(node) {
+      if (node === null) return 0;
+      let leftSum = _maxSum(node.left);
+      let rightSum = _maxSum(node.right);
+      max = Math.max(max, node.val + leftSum + rightSum);
+      return Math.max(0, leftSum + node.val, rightSum + node.val);
+    }
+    _maxSum(this.root);
+    return max;
+
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
 
   nextLarger(lowerBound) {
+
+    // if (!this.root) return null;
 
   }
 
