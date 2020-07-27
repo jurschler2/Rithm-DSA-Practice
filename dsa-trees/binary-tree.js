@@ -77,7 +77,7 @@ class BinaryTree {
       if (node.right) stack.push(node.right);
     }
 
-    return closest === Infinity ? null : close;
+    return close === Infinity ? null : close;
   }
 
   /** Further study!
@@ -121,13 +121,47 @@ class BinaryTree {
    * serialize(tree): serialize the BinaryTree object tree into a string. */
 
   static serialize() {
+    const serial = [];
 
+    function traverse(node) {
+      if (node) {
+        serial.push(node.val);
+        traverse(node.left);
+        traverse(node.right);
+      } else {
+        serial.push("#");
+      }
+    }
+
+    traverse(this.root);
+    return serial.join(" ");
   }
 
   /** Further study!
    * deserialize(stringTree): deserialize stringTree into a BinaryTree object. */
 
-  static deserialize() {
+  static deserialize(s) {
+
+    if (!s) return null;
+
+    const tree = s.split(" ");
+
+    function plantTree() {
+      if (tree.length) {
+        let cur = tree.shift();
+
+        if (cur === "#") return null;
+
+        let newNode = new BinaryTreeNode(+cur);
+        newNode.left = plantTree();
+        newNode.right = plantTree();
+
+        return newNode;
+      }
+    }
+
+    let root = plantTree();
+    return new BinaryTree(root);
 
   }
 
@@ -135,9 +169,20 @@ class BinaryTree {
    * lowestCommonAncestor(node1, node2): find the lowest common ancestor
    * of two nodes in a binary tree. */
 
-  lowestCommonAncestor(node1, node2) {
-    
+  lowestCommonAncestor(node1, node2, currentNode=this.root) {
+
+    if (currentNode === null) return null;
+    if (currentNode === node1 || currentNode === node2) return currentNode;
+
+    const left = this.lowestCommonAncestor(node1, node2, currentNode.left);
+    const right = this.lowestCommonAncestor(node1, node2, currentNode.right);
+
+
+    if (left !== null && right !== null) return currentNode;
+    if (left !== null || right !== null) return left || right;
+    if (left === null && right === null) return null;
   }
 }
+
 
 module.exports = { BinaryTree, BinaryTreeNode };
