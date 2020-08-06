@@ -12,9 +12,9 @@ function sumLists(l1, l2) {
   if (!l1.head && !l2.head) return new LinkedList();
 
   if (!l1.head) {
-    return l2.print();
+    return l2;
   } else if (!l2.head) {
-    return l1.print();
+    return l1;
   }
 
   let num1 = parseInt(l1.print().join(''))
@@ -28,7 +28,7 @@ function sumLists(l1, l2) {
 
   let answer = new LinkedList(num3Arr);
 
-  return answer.print();
+  return answer;
 
 }
 
