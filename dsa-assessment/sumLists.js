@@ -1,5 +1,5 @@
 /**
- * Function that accepts two linked lists which represent two numbers. Each
+ * 
  */
 
 

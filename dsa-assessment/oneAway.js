@@ -1,4 +1,5 @@
-/** Function that compares whether two strings are at most one edit from 
+/** 
+ * Function that compares whether two strings are at most one edit from 
  *  being equal. Edits include adding/subtracting or changing letters.
  */
 
