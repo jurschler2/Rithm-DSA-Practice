@@ -215,6 +215,26 @@ class LinkedList {
     return sum / count;
 
   }
+
+  /** print(): returns an array of all itmes in the list */
+
+  print() {
+
+    let output = []
+    
+    if (this.length === 0) return output;
+
+
+    let current = this.head;
+
+    while (current) {
+      output.push(current.val);
+      current = current.next;
+    }
+
+    return output;
+
+  }
 }
 
-module.exports = LinkedList;
+module.exports = LinkedList, Node;
